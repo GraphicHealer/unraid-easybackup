@@ -6,7 +6,7 @@
 <!ENTITY md5 "f13a053c56607fcaeb2c0f6d5d8f9542">
 <!ENTITY launch "Settings/easybackup">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
-<!ENTITY github "EideardVMR/unraid-easybackup">
+<!ENTITY github "GraphicHealer/unraid-easybackup">
 <!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/&name;.plg">
 ]>
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://forums.unraid.net/topic/48286-plugin-ca-user-scripts/">
