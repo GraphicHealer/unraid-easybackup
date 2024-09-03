@@ -24,8 +24,7 @@ jobs:
         env:
           RELEASE_VERSION: ${{ github.event.release.tag_name }}
         run: |
-          find src/*
-          tar --xz -cf "archive/easybackup-$RELEASE_VERSION.txz" --transform 's,^src/,usr/local/emhttp/plugins/easybackup/,' --exclude='src/' src
+          tar --xz -cf "archive/easybackup-$RELEASE_VERSION.txz" --transform 's,^src/,usr/local/emhttp/plugins/easybackup/,' $(find src/*)
       - uses: actions/upload-artifact@v4
         with:
           name: test-txz
