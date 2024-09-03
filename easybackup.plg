@@ -12,12 +12,12 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;/">
     <SUPPORT>https://forums.unraid.net/topic/145044-plugin-easybackup/</SUPPORT>
     <CHANGES>
-###2023.11.28
+### 2023.11.28
 - Fix: no further attempt to create a backup of ignored VMs and containers.
-###2023.11.10
+### 2023.11.10
 - Add: Add more ZIP compression which is up to 65% faster. This option must be activated in the settings. In later versions this will be the recommended option. 
 - Fix: The GUI now loads faster
-###2023.10.29
+### 2023.10.29
 - Add: Snapshots and backups of started VMs can no longer be performed if no GuestAgent is installed or available.
 - Add: Log file now contains all commands executed on the system and their return in debug mode
 - Add: The log file will now be renamed after reaching the set maximum size. See more in the help text under Settings
@@ -28,24 +28,24 @@
 - Fix: Text in warning boxes is now also readable in light designs
 - Fix: GuestAgent is now reliably detected.
 - Fix: The log file is now downloaded with the correct file name
-###2023.10.11b
+### 2023.10.11b
 - Fix: Create snapshot reports error although everything is correct
-###2023.10.11
+### 2023.10.11
 - Fix: Snapshot failed without reason
 - Add: Download Log Button in Settings Tab
 - Add: Clear Log Button in Settings Tab
-###2023.10.10
+### 2023.10.10
 - Fix: Warning "scandir([...]) Failed to open directory:[...]"
-###2023.09.18
+### 2023.09.18
 - Fix: Uninstaller removes now all Files.
 - Fix: Show Last Backup Timestamp
-###2023.09.12
+### 2023.09.12
 - Fix installing Bugs for Beta release
-###2023.09.11
+### 2023.09.11
 - Adding Dashboard Items
 - Adding Cleanup old Backups
 - Fixing some Bugs
-###2023.09.02
+### 2023.09.02
 - Initial Release - BETA
     </CHANGES>
     <!-- The 'pre-install' script. -->
