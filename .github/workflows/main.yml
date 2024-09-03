@@ -19,7 +19,6 @@ jobs:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
           GITHUB_REPO: ${{ steps.vars.outputs.repo }}
         run: |
-          cd "$GITHUB_REPO/"
           sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/"
 
       # - name: Zip Folder
