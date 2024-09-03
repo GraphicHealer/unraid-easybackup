@@ -18,16 +18,16 @@ jobs:
           RELEASE_VERSION: ${{ github.event.release.tag_name }}
           RELEASE_NOTES: ${{ github.event.release.body }}
         run: |
-          echo "Repo: $GITHUB_REPO"
-          echo "Version: $RELEASE_VERSION"
-          echo "Notes: $RELEASE_NOTES"
           sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
           sed -i "s|    <CHANGES>|    <CHANGES>\n###$RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" easybackup.plg
+      - name: Make TXZ
+        run: |
+          cd ../
+          tar --xz -cf "archive/easybackup-$RELEASE_VERSION.txz" --transform 's,^,usr/local/emhttp/plugins/easybackup/,' src/*
       - uses: actions/upload-artifact@v4
         with:
-          name: my-artifact
-          path: easybackup.plg
-      # - name: Zip Folder
-      #   run: |
-      #     cd ../
-      #     zip -r <repository_name>.zip <repository_name> -x ".git/*" ".github/*"
+          name: test-txz
+          path: archive/easybackup-${{ github.event.release.tag_name }}.txz
+      # - uses: EndBug/add-and-commit@v9
+      #   with:
+      #     default_author: github_actions
