@@ -32,13 +32,9 @@ jobs:
           RELEASE_VERSION: ${{ github.event.release.tag_name }}
           RELEASE_NOTES: ${{ github.event.release.body }}
         run: |
-          echo $RELEASE_VERSION
           sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" *.plg
-          echo $TAR_MD5
           sed -i "s/<!ENTITY md5 \".*\">/<!ENTITY md5 \"$TAR_MD5\">/" *.plg
-          echo $GITHUB_REPOSITORY
-          sed -i "s/<!ENTITY github \".*\">/<!ENTITY github \"$GITHUB_REPOSITORY\">/" *.plg
-          echo ${RELEASE_NOTES//$'\n'/\\$'\n'}
+          sed -i "s/<!ENTITY github \".*\">/<!ENTITY github \"${GITHUB_REPOSITORY//\//\\\/}\">/" *.plg
           sed -i "s|    <CHANGES>|    <CHANGES>\n### $RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" *.plg
       - uses: actions/upload-artifact@v4
         with:
