@@ -11,15 +11,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Set output
         id: vars
-        run: |
-          echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
-          echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
+        run: echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
       - name: Add Release to .plg file
         env:
-          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+          RELEASE_NOTES: ${{ github.event.release.body }}
           GITHUB_REPO: ${{ steps.vars.outputs.repo }}
         run: |
           sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
+          sed -i "s/    <CHANGES>/    <CHANGES>\n###$RELEASE_VERSION\n$RELEASE_NOTES/" easybackup.plg
       - uses: actions/upload-artifact@v4
         with:
           name: my-artifact
