@@ -1,0 +1,24 @@
+name: Zip repository and put on S3
+on:
+  release:
+    types: [published]
+
+jobs:
+  releaseTxz:
+    name: Create Release Txz
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set output
+        id: vars
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+      - name: Check output
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        run: |
+          echo $RELEASE_VERSION
+          echo ${{ steps.vars.outputs.tag }}
+      # - name: Zip Folder
+      #   run: |
+      #     cd ../ # I added this
+      #     zip -r <repository_name>.zip <repository_name> -x ".git/*" ".github/*"
