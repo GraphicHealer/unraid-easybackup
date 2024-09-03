@@ -1,4 +1,4 @@
-name: Zip repository and put on S3
+name: Create TXZ on Release and Upload to Archive
 on:
   release:
     types: [published]
@@ -20,5 +20,5 @@ jobs:
           echo ${{ steps.vars.outputs.tag }}
       # - name: Zip Folder
       #   run: |
-      #     cd ../ # I added this
+      #     cd ../
       #     zip -r <repository_name>.zip <repository_name> -x ".git/*" ".github/*"
