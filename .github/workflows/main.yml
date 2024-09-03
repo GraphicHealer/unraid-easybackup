@@ -24,7 +24,7 @@ jobs:
           PLUGDIR: ${{ steps.vars.outputs.plugdir }}
         run: |
           tar --xz -cf "archive/$PLUGNAME-$RELEASE_VERSION.txz" --transform "s,^src/,$PLUGDIR/," $(find src/*)
-          echo "md5=$(md5sum \"archive/$PLUGNAME-$RELEASE_VERSION.txz\" | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+          echo "md5=$(md5sum "archive/$PLUGNAME-$RELEASE_VERSION.txz" | awk '{ print $1 }')" >> $GITHUB_OUTPUT
       - name: Add Release to .plg file
         env:
           GITHUB_REPO: ${{ steps.vars.outputs.repo }}
