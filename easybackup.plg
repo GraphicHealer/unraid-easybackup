@@ -3,7 +3,7 @@
 <!ENTITY name "easybackup">
 <!ENTITY author "Sascha Michel, GraphicHealer">
 <!ENTITY version "2024.09.03">
-<!ENTITY md5 "5401832fe90b41573dc72eb3397bb698">
+<!ENTITY md5 "2b4c1173a94d32a10a4923ec0a48de62">
 <!ENTITY launch "Settings/easybackup">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "GraphicHealer/unraid-easybackup">
@@ -12,6 +12,12 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;/">
     <SUPPORT>https://forums.unraid.net/topic/145044-plugin-easybackup/</SUPPORT>
     <CHANGES>
+### 2024.09.03
+- Add: Enabled and Set Up Github Actions to Automate Package Updates
+- Fix: Update job.php to fix "Undefined array key" error
+- Fix: Update easybackup0Dashboard.page to fix "Undefined array key" error
+- Fix: Update Docker.class.php to fix FileInfo Error
+- Fix: Modify 'scandirRecursive' to allow File-Type Mounts in Docker
 ### 2024.09.03
 - Add: Enabled and Set Up Github Actions to Automate Package Updates
 - Fix: Update job.php to fix "Undefined array key" error
