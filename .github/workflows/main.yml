@@ -8,7 +8,7 @@ jobs:
     name: Create Release Txz
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set output
         id: vars
         run: |
@@ -20,7 +20,10 @@ jobs:
           GITHUB_REPO: ${{ steps.vars.outputs.repo }}
         run: |
           sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
-
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: easybackup.plg
       # - name: Zip Folder
       #   run: |
       #     cd ../
