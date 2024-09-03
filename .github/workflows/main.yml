@@ -19,7 +19,7 @@ jobs:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
           GITHUB_REPO: ${{ steps.vars.outputs.repo }}
         run: |
-          sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/"
+          sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
 
       # - name: Zip Folder
       #   run: |
