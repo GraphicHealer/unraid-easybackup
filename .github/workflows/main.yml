@@ -38,7 +38,7 @@ jobs:
           sed -i "s/<!ENTITY md5 \".*\">/<!ENTITY md5 \"$TAR_MD5\">/" *.plg
           sed -i "s/<!ENTITY github \".*\">/<!ENTITY github \"${GITHUB_REPOSITORY//\//\\\/}\">/" *.plg
           sed -i "s|    <CHANGES>|    <CHANGES>\n### $RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" *.plg
-      - uses: Shopify/upload-to-release@v1
+      - uses: Shopify/upload-to-release@v2
         with:
           name: ${{ steps.vars.outputs.plugname }}-${{ github.event.release.tag_name }}.txz
           path: archive/${{ steps.vars.outputs.plugname }}-${{ github.event.release.tag_name }}.txz
