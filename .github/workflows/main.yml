@@ -12,19 +12,23 @@ jobs:
       - name: Set output
         id: vars
         run: echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
-      - name: Add Release to .plg file
-        env:
-          GITHUB_REPO: ${{ steps.vars.outputs.repo }}
-          RELEASE_VERSION: ${{ github.event.release.tag_name }}
-          RELEASE_NOTES: ${{ github.event.release.body }}
-        run: |
-          sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
-          sed -i "s|    <CHANGES>|    <CHANGES>\n###$RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" easybackup.plg
       - name: Make TXZ
+        id: tar
         env:
           RELEASE_VERSION: ${{ github.event.release.tag_name }}
         run: |
           tar --xz -cf "archive/easybackup-$RELEASE_VERSION.txz" --transform 's,^src/,usr/local/emhttp/plugins/easybackup/,' $(find src/*)
+          echo "md5=$(md5sum "archive/easybackup-$RELEASE_VERSION.txz" | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+      - name: Add Release to .plg file
+        env:
+          GITHUB_REPO: ${{ steps.vars.outputs.repo }}
+          TAR_MD5: ${{ steps.tar.outputs.md5 }}
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
+          RELEASE_NOTES: ${{ github.event.release.body }}
+        run: |
+          sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
+          sed -i "s/<!ENTITY md5 \".*\">/<!ENTITY md5 \"$TAR_MD5\">/" easybackup.plg
+          sed -i "s|    <CHANGES>|    <CHANGES>\n### $RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" easybackup.plg
       - uses: actions/upload-artifact@v4
         with:
           name: test-txz
