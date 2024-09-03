@@ -38,12 +38,12 @@ jobs:
           sed -i "s/<!ENTITY md5 \".*\">/<!ENTITY md5 \"$TAR_MD5\">/" *.plg
           sed -i "s/<!ENTITY github \".*\">/<!ENTITY github \"${GITHUB_REPOSITORY//\//\\\/}\">/" *.plg
           sed -i "s|    <CHANGES>|    <CHANGES>\n### $RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" *.plg
-      - uses: d1ceward/draft-assets-release-action@v3
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          files: |
-            archive/${{ steps.vars.outputs.plugname }}-${{ github.event.release.tag_name }}.txz
-            ${{ steps.vars.outputs.plugname }}.plg
+          args: archive/${{ steps.vars.outputs.plugname }}-${{ github.event.release.tag_name }}.txz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - uses: actions/upload-artifact@v4
       #   with:
       #     name: test-txz
@@ -53,3 +53,4 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
+          message: "Release ${{ github.event.release.tag_name }}"
