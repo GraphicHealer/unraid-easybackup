@@ -15,18 +15,15 @@ jobs:
         id: vars
         run: |
           echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
-          NAME=$(awk 'match($0, /^<!ENTITY name "(.*)">$/) {print substr($0, RSTART+15, RLENGTH-17)}' *.plg)
-          echo "plugname=$NAME" >> $GITHUB_OUTPUT
-          echo "plugdir=$(awk 'match($0, /^<!ENTITY plugdir "(.*)">$/) {print substr($0, RSTART+18, RLENGTH-20)}' *.plg | sed "s,&name;,$NAME," | sed 's/^\///')" >> $GITHUB_OUTPUT
+          echo "plugdir=$(awk 'match($0, /^<!ENTITY plugdir "(.*)">$/) {print substr($0, RSTART+18, RLENGTH-20)}' *.plg | sed 's,&name;,easybackup,' | sed 's/^\///')" >> $GITHUB_OUTPUT
       - name: Make TXZ
         id: tar
         env:
           RELEASE_VERSION: ${{ github.event.release.tag_name }}
-          PLUGNAME: ${{ steps.vars.outputs.plugname }}
           PLUGDIR: ${{ steps.vars.outputs.plugdir }}
         run: |
-          tar --xz -cf "archive/$PLUGNAME-$RELEASE_VERSION.txz" --transform "s,^src/,$PLUGDIR/," $(find src/*)
-          echo "md5=$(md5sum "archive/$PLUGNAME-$RELEASE_VERSION.txz" | awk '{ print $1 }')" >> $GITHUB_OUTPUT
+          tar --xz -cf "archive/easybackup-$RELEASE_VERSION.txz" --transform "s,^src/,$PLUGDIR/," $(find src/*)
+          echo "md5=$(md5sum "archive/easybackup-$RELEASE_VERSION.txz" | awk '{ print $1 }')" >> $GITHUB_OUTPUT
       - name: Add Release to .plg file
         env:
           GITHUB_REPO: ${{ steps.vars.outputs.repo }}
@@ -41,7 +38,7 @@ jobs:
       - name: Upload to release
         uses: JasonEtco/upload-to-release@master
         with:
-          args: archive/${{ steps.vars.outputs.plugname }}-${{ github.event.release.tag_name }}.txz
+          args: archive/easybackup-${{ github.event.release.tag_name }}.txz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - uses: actions/upload-artifact@v4
