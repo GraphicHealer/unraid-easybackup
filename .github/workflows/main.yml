@@ -22,7 +22,7 @@ jobs:
           echo "Version: $RELEASE_VERSION"
           echo "Notes: $RELEASE_NOTES"
           sed -i "s/<!ENTITY version \".*\">/<!ENTITY version \"$RELEASE_VERSION\">/" easybackup.plg
-          sed -i "s/    <CHANGES>/    <CHANGES>\n###$RELEASE_VERSION\n$RELEASE_NOTES/" easybackup.plg
+          sed -i "s|    <CHANGES>|    <CHANGES>\n###$RELEASE_VERSION\n$RELEASE_NOTES|" easybackup.plg
       - uses: actions/upload-artifact@v4
         with:
           name: my-artifact
