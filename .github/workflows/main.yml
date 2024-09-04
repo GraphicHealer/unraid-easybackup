@@ -17,6 +17,7 @@ jobs:
         id: vars
         run: |
           echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
+          awk 'match($0, /^<!ENTITY plugdir "(.*)">$/) {print substr($0, RSTART+18, RLENGTH-20)}' ${{ env.PLUGNAME }}.plg # | sed "s,&name;,${{ env.PLUGNAME }}," | sed 's/^\///'
           PLUGDIR=$(awk 'match($0, /^<!ENTITY plugdir "(.*)">$/) {print substr($0, RSTART+18, RLENGTH-20)}' ${{ env.PLUGNAME }}.plg | sed "s,&name;,${{ env.PLUGNAME }}," | sed 's/^\///')
           echo $PLUGDIR
           echo "plugdir=$PLUGDIR" >> $GITHUB_OUTPUT
@@ -31,6 +32,7 @@ jobs:
       - name: Add Release Notes to .plg file
         env:
           RELEASE_NOTES: ${{ github.event.release.body }}
+          RELEASE_VERSION: ${{ github.event.release.tag_name }}
         run: |
           sed -i "s|    <CHANGES>|    <CHANGES>\n### $RELEASE_VERSION\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" ${{ env.PLUGNAME }}.plg
       - uses: EndBug/add-and-commit@v9
