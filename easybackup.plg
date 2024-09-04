@@ -18,12 +18,6 @@
 - Fix: Update easybackup0Dashboard.page to fix "Undefined array key" error
 - Fix: Update Docker.class.php to fix FileInfo Error
 - Fix: Modify 'scandirRecursive' to allow File-Type Mounts in Docker
-### 2024.09.03
-- Add: Enabled and Set Up Github Actions to Automate Package Updates
-- Fix: Update job.php to fix "Undefined array key" error
-- Fix: Update easybackup0Dashboard.page to fix "Undefined array key" error
-- Fix: Update Docker.class.php to fix FileInfo Error
-- Fix: Modify 'scandirRecursive' to allow File-Type Mounts in Docker
 ### 2023.11.28
 - Fix: no further attempt to create a backup of ignored VMs and containers.
 ### 2023.11.10
