@@ -17,6 +17,7 @@ jobs:
         id: vars
         run: |
           echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
+          echo $GITHUB_REPOSITORY
           awk 'match($0, /^<!ENTITY plugdir "(.*)">$/)' ${{ env.PLUGNAME }}.plg
           PLUGDIR=$(awk 'match($0, /^<!ENTITY plugdir "(.*)">$/) {print substr($0, RSTART+18, RLENGTH-20)}' ${{ env.PLUGNAME }}.plg | sed "s,&name;,${{ env.PLUGNAME }}," | sed 's/^\///')
           echo $PLUGDIR
