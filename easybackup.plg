@@ -7,10 +7,10 @@
 <!ENTITY launch "Settings/easybackup">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
 <!ENTITY github "GraphicHealer/unraid-easybackup">
-<!ENTITY pluginURL "https://raw.githubusercontent.com/&github;/main/&name;.plg">
+<!ENTITY pluginURL "https://github.com/&github;/releases/latest/download/&name;.plg">
 ]>
-<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;/">
-    <SUPPORT>https://forums.unraid.net/topic/145044-plugin-easybackup/</SUPPORT>
+<PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;">
+    <SUPPORT>https://github.com/&github;</SUPPORT>
     <CHANGES>
 ### 2024.09.03
 - Add: Enabled and Set Up Github Actions to Automate Package Updates
@@ -59,7 +59,7 @@
         The 'source' file.
     -->
     <FILE Name="/boot/config/plugins/&name;/&name;-&version;.txz" Run="upgradepkg --install-new">
-        <URL>https://raw.githubusercontent.com/&github;/main/archive/&name;-&version;.txz</URL>
+        <URL>https://github.com/&github;/releases/latest/download/&name;-&version;.txz</URL>
         <MD5>&md5;</MD5>
     </FILE>
     <!--
