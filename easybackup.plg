@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
 <!ENTITY name "easybackup">
 <!ENTITY author "Sascha Michel, GraphicHealer">
-<!ENTITY version "2024.09.03">
-<!ENTITY md5 "ef674cb909930436be806e03e73e42a1">
+<!ENTITY version "DO_NOT_EDIT">
+<!ENTITY md5 "DO_NOT_EDIT">
 <!ENTITY launch "Settings/easybackup">
 <!ENTITY plugdir "/usr/local/emhttp/plugins/&name;">
-<!ENTITY github "GraphicHealer/unraid-easybackup">
+<!ENTITY github "DO_NOT_EDIT">
 <!ENTITY pluginURL "https://github.com/&github;/releases/latest/download/&name;.plg">
 ]>
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;">
