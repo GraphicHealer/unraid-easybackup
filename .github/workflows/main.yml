@@ -17,9 +17,8 @@ jobs:
         id: vars
         run: |
           echo "repo=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}" >> $GITHUB_OUTPUT
-          echo *.plg
-          awk 'match($0, /^<!ENTITY plugdir "(.*)">$/)' ${{ env.PLUGNAME }}.plg
-          PLUGDIR=$(awk 'match($0, /^<!ENTITY plugdir "(.*)">$/) {print substr($0, RSTART+18, RLENGTH-20)}' ${{ env.PLUGNAME }}.plg | sed "s,&name;,${{ env.PLUGNAME }}," | sed 's/^\///')
+          cat ${{ env.PLUGNAME }}.plg | grep '<!ENTITY plugdir' | sed 's,^<!ENTITY plugdir \"/,,' | sed "s,&name;\">$,${{ env.PLUGNAME }}\/,"
+          PLUGDIR=$(cat ${{ env.PLUGNAME }}.plg | grep '<!ENTITY plugdir' | sed 's,^<!ENTITY plugdir \"/,,' | sed "s,&name;\">$,${{ env.PLUGNAME }}\/,")
           echo $PLUGDIR
           echo "plugdir=$PLUGDIR" >> $GITHUB_OUTPUT
       - name: Make TXZ
