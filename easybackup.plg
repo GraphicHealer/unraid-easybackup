@@ -12,6 +12,8 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;">
     <SUPPORT>https://github.com/&github;</SUPPORT>
     <CHANGES>
+### 2024.09.03.01
+- Fix: Update Workflow to Fix Broken TXZ Package
 ### 2024.09.03
 - Add: Enabled and Set Up Github Actions to Automate Package Updates
 - Fix: Update job.php to fix "Undefined array key" error
