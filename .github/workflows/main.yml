@@ -26,7 +26,11 @@ jobs:
         env:
           RELEASE_NOTES: ${{ github.event.release.body }}
         run: |
-          sed -i "s|    <CHANGES>|    <CHANGES>\n### ${{ github.event.release.tag_name }}\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" ${{ env.PLUGNAME }}.plg
+          if $(cat easybackup.plg | grep '### ${{ github.event.release.tag_name }}') ; then
+            echo "Duplicate Notes, Skipping..."
+          else
+            sed -i "s|    <CHANGES>|    <CHANGES>\n### ${{ github.event.release.tag_name }}\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" ${{ env.PLUGNAME }}.plg
+          fi
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
