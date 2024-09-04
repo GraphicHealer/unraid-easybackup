@@ -1,6 +1,12 @@
 # unraid-easybackup
 This Unraid plugin is designed to help you easily make backups of your VMs and Docker containers.
 
+## Installing
+To install, use this URL in the Unraid Plugins page:
+```
+https://github.com/GraphicHealer/unraid-easybackup/releases/latest/download/easybackup.plg
+```
+
 ## What is currently implemented
 - Creating snapshot-based backups of VMs (vDisk Backup, vDisk Snapshot).
 - Creating container backups. The appdata share is not simply backed up, but the binds of the containers are determined and backed up. Individual binds can be ignored if they are not to be affected by the backup. 
