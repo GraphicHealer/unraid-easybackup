@@ -16,7 +16,7 @@ jobs:
       - name: Set Variables
         id: vars
         run: |
-          echo "plugdir=$(grep '<!ENTITY plugdir' ${{ env.PLUGNAME }}.plg | sed 's,^<!ENTITY plugdir \"/,,' | sed "s,&name;\">,${{ env.PLUGNAME }}\/,")" >> $GITHUB_OUTPUT
+          echo "plugdir=$(grep '<!ENTITY plugdir' ${{ env.PLUGNAME }}.plg | sed 's,^<!ENTITY plugdir \"/,,' | sed "s,&name;\">.*$,${{ env.PLUGNAME }}\/,")" >> $GITHUB_OUTPUT
       - name: Create TXZ from src
         id: tar
         run: |
