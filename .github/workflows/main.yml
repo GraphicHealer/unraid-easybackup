@@ -16,7 +16,7 @@ jobs:
       - name: Set Variables
         id: vars
         run: |
-          echo "plugdir=$(cat ${{ env.PLUGNAME }}.plg | grep '<!ENTITY plugdir' | sed 's,^<!ENTITY plugdir \"/,,' | sed "s,&name;\">,${{ env.PLUGNAME }}\/,")" >> $GITHUB_OUTPUT
+          echo "plugdir=$(grep '<!ENTITY plugdir' ${{ env.PLUGNAME }}.plg | sed 's,^<!ENTITY plugdir \"/,,' | sed "s,&name;\">,${{ env.PLUGNAME }}\/,")" >> $GITHUB_OUTPUT
       - name: Create TXZ from src
         id: tar
         run: |
@@ -26,7 +26,7 @@ jobs:
         env:
           RELEASE_NOTES: ${{ github.event.release.body }}
         run: |
-          if $(cat easybackup.plg | grep '### ${{ github.event.release.tag_name }}') ; then
+          if grep -q '### ${{ github.event.release.tag_name }}' ${{ env.PLUGNAME }}.plg; then
             echo "Duplicate Notes, Skipping..."
           else
             sed -i "s|    <CHANGES>|    <CHANGES>\n### ${{ github.event.release.tag_name }}\n${RELEASE_NOTES//$'\n'/\\$'\n'}|" ${{ env.PLUGNAME }}.plg
