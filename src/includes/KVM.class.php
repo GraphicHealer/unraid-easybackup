@@ -110,6 +110,7 @@ class VM {
         $disks = $xml->devices->disk;
         for($i = 0; $i < $disks->count(); $i++) {
             if($disks[$i]->attributes()['device'] != 'disk') { continue; }
+            if($disks[$i]->attributes()['type'] != 'file') { continue; }
             $path = $disks[$i]->source->attributes()['file'];
             $target = $disks[$i]->target->attributes()['dev'];
 
