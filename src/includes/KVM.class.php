@@ -190,6 +190,11 @@ class VM {
     public function checkGuestAgent(){
         LOG::LogDebug('VM: Check guestagent');
         if($this->guestAgent === null) {
+            if($this->state != VMState::STATE_RUNNING) {
+                $this->error = 'VM must be active';
+                LOG::LogInfo('VM: Guestagent unavailable. VM is not running');
+                return false;
+            }
             $cmd = 'virsh qemu-agent-command "' . $this->name . '" \'{"execute": "guest-info", "arguments": {}}\'';
             cmdExec($cmd, $exec_out, $error);
             if(mb_strlen($error) > 0) {
