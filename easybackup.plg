@@ -12,6 +12,8 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.12.3" icon="file-text-o" support="https://github.com/&github;">
     <SUPPORT>https://github.com/&github;</SUPPORT>
     <CHANGES>
+### 2024.09.24
+**Full Changelog**: https://github.com/GraphicHealer/unraid-easybackup/compare/2024.09.03...2024.09.24
 ### 2024.09.03.01
 - Fix: Update Workflow to Fix Broken TXZ Package
 ### 2024.09.03
