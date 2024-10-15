@@ -735,6 +735,10 @@ class VM {
                     'source' => $pi['dirname'] . '/'
                 ];
 
+                if(!file_exists($pi['dirname'] . '/' . $pi['extension'] . '.xml')) {
+                    file_put_contents($pi['dirname'] . '/' . $pi['extension'] . '.xml', $this->getXML(true));
+                }
+                
                 $copy_files[] = [
                     'full_path' => $pi['dirname'] . '/' . $pi['extension'] . '.xml',
                     'r_path' =>  $pi['extension'] . '.xml',
