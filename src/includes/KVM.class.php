@@ -742,8 +742,10 @@ class VM {
                 ];
 
                 $exists_xml_paths = [];
-                foreach($disk['PreSource'] as $pre) {
-                    
+
+                if($disk['PreSource'] === null) { continue; }
+                
+                foreach($disk['PreSource'] as $pre) {                    
                     $full_path = $pre;
                     $pi = pathinfo($pre);
 
